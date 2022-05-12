@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-export class Input extends Component {
-  render() {
+function Input({placeholder, handleInput,value}) {
+  
     return (
       <div>
-          <input type='number' onChange={(e)=>this.handlerChange(e.target.value)}/>
+          <input value={value} type='number' onChange={(e)=>handleInput(e.target.value)}/>
       </div>
     )
-  }
+  
 }
 
 export default Input
