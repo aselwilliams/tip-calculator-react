@@ -1,7 +1,32 @@
+body{
+  background-image:linear-gradient(to right, black, darkblue);
+}
 .App {
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
 }
 .flex{
   display: flex;
+  justify-content: start;
+}
+input{
+  width: 180px !important;
+}
+select{
+ display: flex;
+ justify-content: start;
+ width: 180px !important;
+}
+::placeholder{
+  font-size:15px;
+  color: grey;
+}
+.display{
+  display: block;
+}
+.hide{
+  display: none;
+}
+optgroup{
+  font-size: 14px;
 }

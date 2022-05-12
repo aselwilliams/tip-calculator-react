@@ -16,31 +16,38 @@ export class TipCalculator extends Component {
     }
     handleCalculate=()=>{
         const {billAmount, service, people} = this.state;
-        const tip = (Number(billAmount) * Number(service)) / Number(people);
-        console.log(tip)
+        if(!billAmount || !service || !people){
+            alert('Please enter values!')
+        }
+        const tip = Math.ceil((billAmount * service) / people);
         this.setState({totalTip: tip})
+        this.setState({billAmount:'', service:'',people:''})
 
     }
   render() {
       const {billAmount, service, people, totalTip} = this.state;
     return (
         <>
-        <Card text='light' bg='dark' style={{ width: '18rem' }} className='mb-2 m-auto mt-5 pt-4 pb-4' >
-      <Card.Title>Tip Calculator</Card.Title>
-      <Card.Body>
-        <Card.Text>How much was your bill?</Card.Text>
-        <div className='flex'>
-        <p>$</p><Input handleInput={(e)=>this.setState({billAmount: e})} value={this.billAmount} placeholder='Bill Amount' className='ms-5'/>
-        </div>
-        <Select handleSelect={(e)=>this.setState({service: e})} value={this.service} />
-        <Card.Text>How many people are sharing the bill?</Card.Text>
-        <div className='flex'>
-        <Input handleInput={(e)=>this.setState({people: e})} value={this.people} placeholder='Number of People' /><p> people</p>
-        </div>
-        <Button onClick={this.handleCalculate} variant='primary' className='m-2'>CALCULATE</Button>
-        <div><strong>{totalTip}</strong></div>
-      </Card.Body>
-      </Card>
+        <Card text='light' bg='secondary' style={{ width: '19rem' }} className='m-auto mt-5 pt-4 pb-4' >
+            <h3>Tip Calculator</h3>
+            <Card.Body>
+                <h6>How much was your bill?</h6>
+                 <div className='flex'>
+                    <p>$</p><Input handleInput={(e)=>this.setState({billAmount: e})} value={billAmount} placeholder='Bill Amount' className='ms-5'/>
+                </div>
+                <Select handleSelect={(e)=>this.setState({service: e})} value={this.state.service} />
+                <h6>How many people are sharing the bill?</h6>
+                <div className='flex'>
+                    <Input handleInput={(e)=>this.setState({people: e})} value={people} placeholder='Number of People' className='ms-5'/><p> people</p>
+                </div>
+                <Button onClick={this.handleCalculate} variant='primary' className='m-3'>Calculate</Button>
+                <div className={totalTip>0 ? 'display' : 'hide'}>
+                    <p>TIP AMOUNT</p>
+                    <h5><strong>${totalTip}</strong></h5>
+                    <p>each</p>
+                </div>
+            </Card.Body>
+        </Card>
       </>
     )
   }
